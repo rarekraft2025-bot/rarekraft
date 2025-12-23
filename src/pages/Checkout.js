@@ -43,31 +43,37 @@ function Checkout({ cart, setCart }) {
         createdAt: serverTimestamp(),
       });
 
-      // 2️⃣ Send email
+      // 2️⃣ Prepare product list HTML
+      const productsHTML = cart
+        .map(
+          (item, index) =>
+            `<p>${index + 1}. <strong>${item.name}</strong> - Size: ${item.size}, Color: ${item.color}, Qty: ${item.qty}, Price: ₹${item.price * item.qty}</p>`
+        )
+        .join("");
+
+      // 3️⃣ Send email with full details
       await emailjs.send(
-        "service_m1kvxlc",       
-        "template_61wdvxe",       
+        "service_m1kvxlc",      // your service ID
+        "template_61wdvxe",     // your template ID
         {
           order_id: docRef.id,
           name: user.name,
           email: user.email,
+          phone: user.phone,
+          address: user.address,
           total: totalPrice,
+          products: productsHTML, // send HTML string for products
         },
-        "Xh8oWxShTAC0msOgw"     
+        "Xh8oWxShTAC0msOgw"     // your public key
       );
 
       toast.success("Order placed & email sent ✅");
 
-      setUser({
-        name: "",
-        email: "",
-        phone: "",
-        address: "",
-      });
-
+      // Reset form and cart
+      setUser({ name: "", email: "", phone: "", address: "" });
       setCart([]);
     } catch (error) {
-      console.error(error);
+      console.error("Order Error:", error);
       toast.error("Something went wrong");
     }
   };
@@ -76,6 +82,7 @@ function Checkout({ cart, setCart }) {
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
 
+        {/* Checkout Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow rounded-lg p-6 space-y-4"
@@ -119,12 +126,13 @@ function Checkout({ cart, setCart }) {
 
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded"
+            className="w-full bg-orange-500 text-white py-3 rounded hover:bg-orange-600 transition"
           >
             Place Order
           </button>
         </form>
 
+        {/* Order Summary */}
         <div className="bg-white shadow rounded-lg p-6">
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
