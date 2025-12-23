@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Admin from "./components/Admin";
+import Header from "./components/Header";
+import Detail from "./pages/Detail";
 
 function App() {
+
+  
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (item) => {
+    setCart([...cart, item]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
+      <BrowserRouter>
+        <Header cartCount={cart.length} />
+        <Routes>
+          <Route path="/" element={<Home addToCart={addToCart} />} />
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} setCart={setCart} removeFromCart={removeFromCart} />}
+          />
+          <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />}/>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/product/:id" element={<Detail addToCart={addToCart} />}/>
+
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
