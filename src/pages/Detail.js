@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import Price from "../components/Price";
 
 function Detail({ addToCart }) {
   const { state } = useLocation();
@@ -8,23 +9,23 @@ function Detail({ addToCart }) {
 
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
-  const [color, setColor] = useState("");
+  // const [color, setColor] = useState("");
 
   if (!product) {
     return <p className="text-center mt-20">Product not found</p>;
   }
 
   const sizes = ["S", "M", "L", "XL"];
-  const colors = [
-    { name: "Black", hex: "#333333" },
-    { name: "White", hex: "#f3f3f3" },
-    { name: "Gray", hex: "#888888" },
-    { name: "Beige", hex: "#d9cbb1" },
-  ];
+  // const colors = [
+  //   { name: "Black", hex: "#333333" },
+  //   { name: "White", hex: "#f3f3f3" },
+  //   { name: "Gray", hex: "#888888" },
+  //   { name: "Beige", hex: "#d9cbb1" },
+  // ];
 
   const handleAddToCart = () => {
-    if (!size || !color) {
-      toast.error("Please select size and color");
+    if (!size) {
+      toast.error("Please select size");
       return;
     }
 
@@ -32,7 +33,6 @@ function Detail({ addToCart }) {
       ...product,
       qty,
       size,
-      color,
     });
 
     toast.success("Added to cart ✅", {
@@ -42,7 +42,7 @@ function Detail({ addToCart }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#e7ddd5] flex items-center justify-center p-6">
+    <div className="p-10 bg-[#e7ddd5] flex items-center justify-center">
       <div className="bg-white max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 shadow-lg">
 
         {/* LEFT IMAGE */}
@@ -62,9 +62,8 @@ function Detail({ addToCart }) {
               {product.description}
             </p>
 
-            <p className="mt-4 text-xl font-semibold">
-              ₹{product.price}
-            </p>
+            {/* Price */}
+            <Price product={product}></Price>
 
             {/* SIZE */}
             <div className="mt-6">
@@ -74,11 +73,10 @@ function Detail({ addToCart }) {
                   <button
                     key={s}
                     onClick={() => setSize(s)}
-                    className={`px-3 py-1 border rounded ${
-                      size === s
-                        ? "bg-orange-500 text-white border-orange-500"
-                        : "border-gray-300"
-                    }`}
+                    className={`px-3 py-1 border rounded ${size === s
+                      ? "bg-orange-500 text-white border-orange-500"
+                      : "border-gray-300"
+                      }`}
                   >
                     {s}
                   </button>
@@ -87,7 +85,7 @@ function Detail({ addToCart }) {
             </div>
 
             {/* COLOR */}
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <p className="text-sm font-semibold mb-2">Select Color</p>
               <div className="flex gap-2">
                 {colors.map((c) => (
@@ -104,7 +102,7 @@ function Detail({ addToCart }) {
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* QUANTITY */}
             <div className="mt-4 flex items-center gap-3">

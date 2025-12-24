@@ -15,7 +15,7 @@ function Home({ addToCart }) {
             <Link
               key={item.id}
               to={`/product/${item.id}`}
-              state={{ product: item }}   // ⭐ PASS PRODUCT HERE
+              state={{ product: item }}  
             >
               <ProductCard
                 product={item}

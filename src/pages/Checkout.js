@@ -35,7 +35,7 @@ function Checkout({ cart, setCart }) {
     }
 
     try {
-      // 1️⃣ Save order to Firebase
+      // Save order to Firebase
       const docRef = await addDoc(collection(db, "orders"), {
         user,
         cart,
@@ -43,7 +43,7 @@ function Checkout({ cart, setCart }) {
         createdAt: serverTimestamp(),
       });
 
-      // 2️⃣ Prepare product list HTML
+      //  Prepare product list HTML
       const productsHTML = cart
         .map(
           (item, index) =>
@@ -51,10 +51,10 @@ function Checkout({ cart, setCart }) {
         )
         .join("");
 
-      // 3️⃣ Send email with full details
+      // Send email with full details
       await emailjs.send(
-        "service_m1kvxlc",      // your service ID
-        "template_61wdvxe",     // your template ID
+        "service_m1kvxlc",      // service ID
+        "template_61wdvxe",     // template ID
         {
           order_id: docRef.id,
           name: user.name,
@@ -62,9 +62,9 @@ function Checkout({ cart, setCart }) {
           phone: user.phone,
           address: user.address,
           total: totalPrice,
-          products: productsHTML, // send HTML string for products
+          products: productsHTML, 
         },
-        "Xh8oWxShTAC0msOgw"     // your public key
+        "Xh8oWxShTAC0msOgw"     // public key
       );
 
       toast.success("Order placed & email sent ✅");

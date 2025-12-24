@@ -6,7 +6,6 @@ function HomeBanner() {
     <section className="bg-[#F6F5F3]">
       <div className="max-w-7xl mx-auto px-4 h-[40vh] grid grid-cols-1 md:grid-cols-2 items-center">
 
-        {/* Text */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -26,7 +25,6 @@ function HomeBanner() {
           </p>
         </motion.div>
 
-        {/* Circle Image */}
         <motion.div
           className="flex justify-center"
           animate={{ y: [0, -6, 0] }}

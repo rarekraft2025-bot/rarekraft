@@ -48,7 +48,7 @@ function Cart({ cart, setCart }) {
                 {/* Optional (if size/color exist) */}
                 {item.size && (
                   <p className="text-xs text-gray-400">
-                    Size: {item.size} | Color: {item.color}
+                    Size: {item.size}
                   </p>
                 )}
               </div>
