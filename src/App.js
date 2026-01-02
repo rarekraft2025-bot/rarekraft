@@ -8,6 +8,7 @@ import Checkout from "./pages/Checkout";
 import Admin from "./components/Admin";
 import Header from "./components/Header";
 import Detail from "./pages/Detail";
+import ThankYou from "./pages/ThankYou";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />}/>
           <Route path="/admin" element={<Admin />} />
           <Route path="/product/:id" element={<Detail addToCart={addToCart} />}/>
+          <Route path="/thank-you/:orderId" element={<ThankYou />} />
 
         </Routes>
       </BrowserRouter>

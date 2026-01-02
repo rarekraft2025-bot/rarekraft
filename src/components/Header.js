@@ -1,7 +1,7 @@
 import logo from "../assets/Rare_kraft.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaInstagram, FaFacebookF, FaWhatsapp, FaShoppingCart } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaShoppingCart } from "react-icons/fa";
 
 function Header({ cartCount }) {
   const [cart, setCart] = useState([]);
@@ -13,16 +13,13 @@ function Header({ cartCount }) {
 
           {/* Phone */}
           <p className="text-xs md:text-sm">
-            📞 +91 98765 43210
+            <a href="tel:8878236700">📞 8878236700</a>
           </p>
 
           {/* Social Icons */}
           <div className="flex gap-4 text-sm">
             <a href="#" className="hover:text-orange-400">
               <FaInstagram />
-            </a>
-            <a href="#" className="hover:text-orange-400">
-              <FaFacebookF />
             </a>
             <a href="#" className="hover:text-orange-400">
               <FaWhatsapp />

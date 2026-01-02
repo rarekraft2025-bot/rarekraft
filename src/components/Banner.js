@@ -18,11 +18,6 @@ function HomeBanner() {
           <h1 className="mt-4 text-4xl md:text-5xl font-medium text-gray-900">
             Crafted for<br />Professional Elegance
           </h1>
-
-          <p className="mt-4 text-gray-600 max-w-md">
-            Premium formal shirts designed with precision,
-            comfort, and lasting style in mind.
-          </p>
         </motion.div>
 
         <motion.div
