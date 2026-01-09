@@ -116,8 +116,6 @@ const products = [
       blackthirdfront,
       blackfourthfront,
       blackfront,
-      blackleft,
-      blackback,
     ],
     highlights: [
       "Premium linen fabric",

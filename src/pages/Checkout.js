@@ -187,10 +187,10 @@ function Checkout({ cart, setCart }) {
                 <input type="radio" checked={paymentMethod === "COD"} onChange={() => setPaymentMethod("COD")} disabled={isLoading} />
                 Cash on Delivery
               </label>
-              <label className="flex gap-2">
+              {/* <label className="flex gap-2">
                 <input type="radio" checked={paymentMethod === "ONLINE"} onChange={() => setPaymentMethod("ONLINE")} disabled={isLoading} />
                 Online Payment
-              </label>
+              </label> */}
             </div>
 
             <button

@@ -9,13 +9,17 @@ function Home({ addToCart }) {
     <div>
       <HomeBanner />
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      {/* PRODUCTS SECTION */}
+      <div
+        id="shop-collection"
+        className="max-w-7xl mx-auto px-4 py-10"
+      >
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {products.map((item) => (
             <Link
               key={item.id}
               to={`/product/${item.id}`}
-              state={{ product: item }}  
+              state={{ product: item }}
             >
               <ProductCard
                 product={item}

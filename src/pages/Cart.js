@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import Price from "../components/Price";
 import Footer from "../components/Footer";
 
-function Cart({ cart, setCart }) {
+function Cart({ cart, setCart, }) {
 
   const removeItem = (index, e) => {
-    e.stopPropagation(); // 🔥 prevents navigation
-    e.preventDefault();  // 🔥 prevents Link click
+    e.stopPropagation();
+    e.preventDefault();
 
     const newCart = [...cart];
     newCart.splice(index, 1);
@@ -16,96 +16,128 @@ function Cart({ cart, setCart }) {
 
   const getSellingPrice = (item) => {
     if (!item.originalPrice) return 0;
-
     return item.discount
       ? Math.round(
-        item.originalPrice - (item.originalPrice * item.discount) / 100
+        item.originalPrice -
+        (item.originalPrice * item.discount) / 100
       )
       : item.originalPrice;
   };
 
-  const totalPrice = cart.reduce((acc, item) => {
-    return acc + getSellingPrice(item) * item.qty;
-  }, 0);
+  const bagTotal = cart.reduce(
+    (acc, item) => acc + getSellingPrice(item) * item.qty,
+    0
+  );
 
   return (
     <>
-      <div className="max-w-5xl mx-auto bg-white shadow-lg p-6 mt-12 rounded-lg mb-16">
-        <h2 className="text-xl font-bold mb-6">Your Cart</h2>
+      <div className="max-w-7xl mx-auto px-4 py-10 pb-40">
 
         {cart.length === 0 ? (
-          <p className="text-gray-500 text-center">Cart is empty</p>
+          <p className="text-center text-gray-500">
+            Cart is empty
+          </p>
         ) : (
-          <div className="space-y-6">
-            {cart.map((item, index) => (
-              <div
-                key={item.id}
-                className="flex gap-4 items-center border-b pb-4"
-              >
-                {/* Clickable product */}
-                <Link
-                  to={`/product/${item.id}`}
-                  className="flex gap-4 items-center flex-1"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            {/* LEFT – CART ITEMS */}
+            <div className="md:col-span-2 space-y-6">
+
+              {cart.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="flex gap-4 border-b pb-6"
                 >
                   {/* Image */}
-                  <div className="w-24 h-24 flex-shrink-0 overflow-hidden rounded">
+                  <Link to={`/product/${item.id}`}>
                     <img
-                      src={item.images?.[0] || "/placeholder.png"}
+                      src={item.images?.[0]}
                       alt={item.name}
-                      className="w-full h-full object-cover object-top rounded-[6px]"
+                      className="w-28 h-36 object-cover rounded object-top"
                     />
-                  </div>
+                  </Link>
 
-                  {/* Details */}
-                  <div>
-                    <p className="font-semibold hover:underline">
+                  {/* Info */}
+                  <div className="flex-1">
+                    <Link
+                      to={`/product/${item.id}`}
+                      className="font-semibold hover:underline"
+                    >
                       {item.name}
-                    </p>
-                    <Price product={item} />
-                    <p className="text-sm text-gray-500">
-                      Qty: {item.qty}
+                    </Link>
+
+                    <p className="text-sm text-gray-500 mt-1">
+                      Size: {item.size} | Qty: {item.qty}
                     </p>
 
-                    {item.size && (
-                      <p className="text-xs text-gray-400">
-                        Size: {item.size}
-                      </p>
-                    )}
+                    <div className="mt-2">
+                      <Price product={item} />
+                    </div>
+
                   </div>
-                </Link>
+                  <div className="flex flex-col items-end gap-24">
+                    <button
+                      onClick={(e) => removeItem(index, e)}
+                      className="text-gray-400 hover:text-red-600 text-lg"
+                      title="Remove item"
+                    >
+                      🗑
+                    </button>
+                    <p className="font-semibold">
+                      ₹{getSellingPrice(item) * item.qty}
+                    </p>
 
-                {/* Remove */}
-                <button
-                  onClick={(e) => removeItem(index, e)}
-                  className="text-red-500 hover:text-red-700 text-lg"
-                >
-                  🗑
-                </button>
+
+                  </div>
+
+                  {/* Item Price */}
+
+
+
+                </div>
+              ))}
+            </div>
+
+            {/* RIGHT – PRICE DETAILS */}
+            <div className="border rounded-lg p-6 h-fit sticky top-20">
+
+              <h3 className="font-semibold text-lg mb-4">
+                PRICE DETAILS
+              </h3>
+
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span>Bag Total</span>
+                  <span>₹{bagTotal}</span>
+                </div>
+
+                <div className="flex justify-between text-green-600">
+                  <span>Coupon Discount</span>
+                  <span>- ₹0</span>
+                </div>
+
+                <hr />
+
+                <div className="flex justify-between font-semibold text-base">
+                  <span>Grand Total</span>
+                  <span>₹{bagTotal}</span>
+                </div>
               </div>
-            ))}
-          </div>
-        )}
 
-        {/* Footer */}
-        {cart.length > 0 && (
-          <div className="mt-6 flex justify-between items-center border-t pt-4">
-            <p className="text-lg font-bold">
-              Total: ₹{totalPrice}
-            </p>
-            <Link
-              to="/checkout"
-              className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600 transition"
-            >
-              Checkout
-            </Link>
+              <Link
+                to="/checkout"
+                className="block mt-6 bg-black text-white text-center py-3 font-semibold hover:bg-gray-900 transition"
+              >
+                PAY ₹{bagTotal}
+              </Link>
+            </div>
           </div>
         )}
       </div>
+
       <Footer />
     </>
-
   );
 }
 
 export default Cart;
-

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import products from "../data/products";
 import { toast } from "react-toastify";
 import Price from "../components/Price";
@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 
 function Detail({ addToCart }) {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const product = products.find(
     (p) => String(p.id) === String(id)
@@ -16,6 +17,7 @@ function Detail({ addToCart }) {
   const [size, setSize] = useState("");
   const [activeImg, setActiveImg] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -33,13 +35,22 @@ function Detail({ addToCart }) {
   const images = product.images || [];
 
   const handleAddToCart = () => {
+    // ❌ size not selected → top toast
     if (!size) {
-      toast.error("Please select size");
+      toast.error("Please select size", {
+        position: "top-center",
+      });
       return;
     }
 
+    // ✅ size selected
     addToCart({ ...product, qty, size });
-    toast.success("Added to cart ✅");
+
+    setShowAdded(true);
+
+    setTimeout(() => {
+      setShowAdded(false);
+    }, 12000);
   };
 
   const prevImg = () =>
@@ -59,8 +70,6 @@ function Detail({ addToCart }) {
 
           {/* LEFT GALLERY */}
           <div className="flex flex-col md:flex-row gap-4 p-4 sm:p-6">
-
-            {/* Thumbnails */}
             <div className="flex md:flex-col gap-2 md:gap-3 order-2 md:order-1">
               {images.map((img, i) => (
                 <img
@@ -76,7 +85,6 @@ function Detail({ addToCart }) {
               ))}
             </div>
 
-            {/* Main Image */}
             <div
               className="flex-1 cursor-zoom-in order-1 md:order-2"
               onClick={() => setLightboxOpen(true)}
@@ -133,9 +141,7 @@ function Detail({ addToCart }) {
                   -
                 </button>
 
-                <span className="font-semibold">
-                  {qty}
-                </span>
+                <span className="font-semibold">{qty}</span>
 
                 <button
                   onClick={() => setQty(qty + 1)}
@@ -152,31 +158,6 @@ function Detail({ addToCart }) {
               >
                 Add to Cart
               </button>
-
-              {/* HIGHLIGHTS */}
-              {product.highlights?.length > 0 && (
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold mb-2">
-                    Key Highlights
-                  </h3>
-                  <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
-                    {product.highlights.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* DELIVERY INFO */}
-              {product.deliveryInfo && (
-                <div className="mt-6 border-t pt-4 text-sm text-gray-700 space-y-1">
-                  <p>🚚 {product.deliveryInfo.delivery}</p>
-                  <p>🔄 {product.deliveryInfo.returns}</p>
-                  {product.deliveryInfo.cod && (
-                    <p>💳 Cash on Delivery available</p>
-                  )}
-                </div>
-              )}
             </div>
 
             <p className="text-xs font-semibold mt-10">
@@ -184,56 +165,33 @@ function Detail({ addToCart }) {
             </p>
           </div>
         </div>
-
-        {/* LIGHTBOX */}
-        {lightboxOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
-            onClick={() => setLightboxOpen(false)}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevImg();
-              }}
-              className="absolute left-4 text-white text-4xl"
-            >
-              ‹
-            </button>
-
-            <img
-              src={images[activeImg]}
-              className="max-h-[80vh] max-w-[90vw]"
-              onClick={(e) => e.stopPropagation()}
-              alt=""
-            />
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextImg();
-              }}
-              className="absolute right-4 text-white text-4xl"
-            >
-              ›
-            </button>
-
-            <button
-              onClick={() => setLightboxOpen(false)}
-              className="absolute top-5 right-6 text-white text-3xl"
-            >
-              ✕
-            </button>
-          </div>
-        )}
-
       </div>
-      <Footer></Footer>
+
+      {/* BOTTOM ADD TO CART BLOCK */}
+      {showAdded && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-black text-white px-4 sm:px-8 md:px-16 lg:px-24 py-3 shadow-lg flex items-center gap-4">
+          <div className="flex flex-col">
+            <p className="text-sm font-semibold">
+              {product.name}
+            </p>
+            <p className="text-xs text-gray-300">
+              Product added to cart
+            </p>
+          </div>
+
+          <button
+            onClick={() => navigate("/cart")}
+            className="ml-auto text-sm font-semibold underline text-orange-500"
+          >
+            View Bag
+          </button>
+        </div>
+
+      )}
+
+      <Footer />
     </>
-
-
   );
 }
 
 export default Detail;
-

@@ -9,7 +9,7 @@ function Price({ product, className = "" }) {
 
   return (
     <div className={`flex flex-wrap items-center gap-2 mt-2 ${className}`}>
-      <span className="text-md font-bold text-gray-800">
+      <span className="text-md font-semibold text-gray-800">
         ₹{sellingPrice}
       </span>
 
