@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -23,6 +23,10 @@ function App() {
     setCart(cart.filter((_, i) => i !== index));
   };
 
+  useEffect(() => {
+    document.title = "Rarekraft";
+  }, []);
+  
 
 
   return (

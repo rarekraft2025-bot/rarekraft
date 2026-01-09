@@ -18,10 +18,10 @@ function Header({ cartCount }) {
 
           {/* Social Icons */}
           <div className="flex gap-4 text-sm">
-            <a href="#" className="hover:text-orange-400">
+            <a href="https://www.instagram.com/rarekraft_for_rare" className="hover:text-orange-400">
               <FaInstagram />
             </a>
-            <a href="#" className="hover:text-orange-400">
+            <a href="https://wa.me/918878236700" className="hover:text-orange-400">
               <FaWhatsapp />
             </a>
           </div>

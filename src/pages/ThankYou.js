@@ -73,19 +73,16 @@ function ThankYou() {
 
         {/* Order Items */}
         <div>
-          <h2 className="font-semibold mb-2">Order Summary</h2>
+          {/* <h2 className="font-semibold mb-2">Order Summary</h2>
 
           {order.cart.map((item, i) => (
             <div
               key={i}
               className="flex justify-between border-b py-2 text-sm"
             >
-              <span>
-                {item.name} × {item.qty}
-              </span>
-              <span>₹{item.price * item.qty}</span>
+              <span>Order QTY{ item.qty}</span>
             </div>
-          ))}
+          ))} */}
 
           <div className="flex justify-between font-bold text-lg mt-4">
             <span>Total</span>

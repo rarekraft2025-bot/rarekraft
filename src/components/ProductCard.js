@@ -4,15 +4,16 @@ import Price from "./Price";
 function ProductCard({ product }) {
   return (
     <div className="bg-white shadow-md rounded-lg border border-gray-200 hover:shadow-lg transition-shadow duration-300 flex flex-col">
-      
+
       {/* Product Image */}
-      <div className="w-full h-72 overflow-hidden">
+      <div className="h-[160px] sm:h-[200px] md:h-[240px] overflow-hidden rounded-[6px]">
         <img
           src={product.images?.[0]}
           alt={product.name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 object-top rounded-[6px]"
+          className="w-full h-full object-cover object-top transition-transform duration-300 hover:scale-105"
         />
       </div>
+
 
       {/* Product Info */}
       <div className="p-4 flex flex-col gap-2 flex-1">
