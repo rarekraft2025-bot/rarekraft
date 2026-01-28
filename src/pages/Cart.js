@@ -111,10 +111,10 @@ function Cart({ cart, setCart, }) {
                   <span>₹{bagTotal}</span>
                 </div>
 
-                {/* <div className="flex justify-between text-green-600">
+                <div className="flex justify-between text-green-600">
                   <span>Coupon Discount</span>
                   <span>- ₹0</span>
-                </div> */}
+                </div>
 
                 <hr />
 
