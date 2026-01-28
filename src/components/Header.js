@@ -1,5 +1,4 @@
 import logo from "../assets/Rare_kraft.svg";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp, FaShoppingCart, FaPhone } from "react-icons/fa";
 
