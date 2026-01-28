@@ -16,7 +16,7 @@ function Detail({ addToCart }) {
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
   const [activeImg, setActiveImg] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  // const [lightboxOpen, setLightboxOpen] = useState(false);
   const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
@@ -53,15 +53,15 @@ function Detail({ addToCart }) {
     }, 12000);
   };
 
-  const prevImg = () =>
-    setActiveImg((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
+  // const prevImg = () =>
+  //   setActiveImg((prev) =>
+  //     prev === 0 ? images.length - 1 : prev - 1
+  //   );
 
-  const nextImg = () =>
-    setActiveImg((prev) =>
-      prev === images.length - 1 ? 0 : prev + 1
-    );
+  // const nextImg = () =>
+  //   setActiveImg((prev) =>
+  //     prev === images.length - 1 ? 0 : prev + 1
+  //   );
 
   return (
     <>

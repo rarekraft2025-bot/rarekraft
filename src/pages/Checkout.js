@@ -151,10 +151,6 @@ function Checkout({ cart, setCart }) {
     }
   };
 
-
-  const INSTAGRAM_USERNAME = "rarekraft_for_rare";
-
-
   return (
     <>
       <div className=" bg-gray-50 py-10 px-4">

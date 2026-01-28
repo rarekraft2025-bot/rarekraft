@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp, FaShoppingCart, FaPhone } from "react-icons/fa";
 
 function Header({ cartCount }) {
-  const [cart, setCart] = useState([]);
   return (
     <>
       {/* ===== Top Header ===== */}
