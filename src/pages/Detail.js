@@ -87,7 +87,7 @@ function Detail({ addToCart }) {
 
             <div
               className="flex-1 cursor-zoom-in order-1 md:order-2"
-              onClick={() => setLightboxOpen(true)}
+              // onClick={() => setLightboxOpen(true)}
             >
               <img
                 src={images[activeImg]}
