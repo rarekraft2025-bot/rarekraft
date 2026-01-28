@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import shirtImg from "../assets/banner-image.jpg";
-import { Link } from "react-router-dom";
 
 function HomeBanner() {
   return (
