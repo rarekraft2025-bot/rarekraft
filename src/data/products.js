@@ -1,28 +1,27 @@
-import blueFront from "../assets/blue-shirts/1.png";
-import blueBack from "../assets/blue-shirts/2.png";
-import blueLeft from "../assets/blue-shirts/3.png";
-import maroonFront from "../assets/coffee-shirts/1.png";
-import maroonBack from "../assets/coffee-shirts/2.png";
-import maroonLeft from "../assets/coffee-shirts/3.png";
-import pinkFront from "../assets/pink-shirts/1.png";
-import pinkLeft from "../assets/pink-shirts/2.png";
-import frontpink from "../assets/pink-shirts/3.png";
-import backpink from "../assets/pink-shirts/4.png";
-import sidepink from "../assets/pink-shirts/5.png";
-import skyblueFront from "../assets/skyblue-shirts/1.png";
-import skyblueBack from "../assets/skyblue-shirts/2.png";
-import leftskyblue from "../assets/skyblue-shirts/4.png";
-import creamfront from "../assets/cream-shirts/1.png";
-import creamfullfront from "../assets/cream-shirts/2.png";
-import offwhitefront from "../assets/cream-shirts/3.png";
-import offwhiteback from "../assets/cream-shirts/4.png";
-import blackfront from "../assets/black-shirts/1.png";
-import blacksecondfront from "../assets/black-shirts/2.png";
-import blackthirdfront from "../assets/black-shirts/3.png";
-import blackfourthfront from "../assets/black-shirts/4.png";
-import olivefront from "../assets/olive-green/1.png";
-import oliveback from "../assets/olive-green/2.png";
-import oliveside from "../assets/olive-green/3.png";
+import blueFront from "../assets/blue-shirts/bluefront.jpeg";
+import blueBack from "../assets/blue-shirts/bluefrontsecond.jpeg";
+import blueLeft from "../assets/blue-shirts/blueback.jpeg";
+import maroonFront from "../assets/coffee-shirts/maroonfront.jpeg";
+import maroonBack from "../assets/coffee-shirts/maroonfrontsecond.jpeg";
+import maroonLeft from "../assets/coffee-shirts/maroonback.jpeg";
+import pinkFront from "../assets/pink-shirts/pinkfront.jpeg";
+import pinkLeft from "../assets/pink-shirts/pinkback.jpeg";
+import frontpink from "../assets/pink-shirts/pinkfrontsecond.jpeg";
+import backpink from "../assets/pink-shirts/pinkside.jpeg";
+import skyblueFront from "../assets/skyblue-shirts/skybluefront.jpeg";
+import skyblueBack from "../assets/skyblue-shirts/skybluefrontsecond.jpeg";
+import leftskyblue from "../assets/skyblue-shirts/skyblueleft.jpeg";
+import creamfront from "../assets/cream-shirts/offwhitefront.jpeg";
+import creamfullfront from "../assets/cream-shirts/offwhitefrontsecond.jpeg";
+import offwhitefront from "../assets/cream-shirts/offwhiteback.jpeg";
+import offwhiteback from "../assets/cream-shirts/offwhitethird.jpeg";
+import blackfront from "../assets/black-shirts/blackfront.jpeg";
+import blacksecondfront from "../assets/black-shirts/blackfrontsecond.jpeg";
+import blackthirdfront from "../assets/black-shirts/blackback.jpeg";
+import blackfourthfront from "../assets/black-shirts/blackbacksecond.jpeg";
+import olivefront from "../assets/olive-green/olivefront.jpeg";
+import oliveback from "../assets/olive-green/oliveback.jpeg";
+import oliveside from "../assets/olive-green/oliveside.jpeg";
 
 
 
@@ -133,8 +132,8 @@ const products = [
     discount: 52,
     description: "100% Blended linen shirts are your stylish companion that offer perfect fusion of comfort and elegance. They are ideal for warmer weather. With the blend of linen and other materials, our shirts provide a luxurious feel and a polished look.",
     images: [
-      creamfront,
       creamfullfront,
+      creamfront,
       offwhiteback,
       offwhitefront,
     ],
@@ -182,11 +181,10 @@ const products = [
     discount: 51,
     description: "Crafted from luxurious Barfi silk, this pink formal shirt features a smooth sheen, lightweight feel, and refined elegance—perfect for formal and special occasions.",
     images: [
+      frontpink,
       pinkFront,
       pinkLeft,
-      frontpink,
       backpink,
-      sidepink,
     ],
     highlights: [
       "Premium Barfi Silk fabric",
