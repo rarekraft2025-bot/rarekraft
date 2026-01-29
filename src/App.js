@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
@@ -12,39 +12,63 @@ import ThankYou from "./pages/ThankYou";
 
 function App() {
 
-  
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("rarekraft_cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem("rarekraft_cart", JSON.stringify(cart));
+  }, [cart]);
+
 
   const addToCart = (item) => {
-    setCart([...cart, item]);
+    setCart(prev => [...prev, item]);
   };
 
+  
   const removeFromCart = (index) => {
-    setCart(cart.filter((_, i) => i !== index));
+    setCart(prev => prev.filter((_, i) => i !== index));
   };
 
   useEffect(() => {
     document.title = "Rarekraft";
   }, []);
-  
-
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
       <BrowserRouter>
         <Header cartCount={cart.length} />
+
         <Routes>
           <Route path="/" element={<Home addToCart={addToCart} />} />
+
           <Route
             path="/cart"
-            element={<Cart cart={cart} setCart={setCart} removeFromCart={removeFromCart} />}
+            element={
+              <Cart 
+                cart={cart} 
+                setCart={setCart} 
+                removeFromCart={removeFromCart} 
+              />
+            }
           />
-          <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />}/>
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/product/:id" element={<Detail addToCart={addToCart} />}/>
-          <Route path="/thank-you/:orderId" element={<ThankYou />} />
 
+          <Route
+            path="/checkout"
+            element={<Checkout cart={cart} setCart={setCart} />}
+          />
+
+          <Route path="/admin" element={<Admin />} />
+
+          <Route
+            path="/product/:id"
+            element={<Detail addToCart={addToCart} cart={cart} />}
+          />
+
+          <Route path="/thank-you/:orderId" element={<ThankYou />} />
         </Routes>
       </BrowserRouter>
     </>

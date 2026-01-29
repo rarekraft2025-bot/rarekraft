@@ -44,12 +44,12 @@ function Header({ cartCount }) {
               Home
             </Link>
 
-            <Link
+            {/* <Link
               to="/checkout"
               className="text-gray-700 hover:text-orange-500 font-medium"
             >
               Checkout
-            </Link>
+            </Link> */}
 
             {/* Cart */}
             <Link to="/cart" className="relative">

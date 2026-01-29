@@ -4,8 +4,9 @@ import products from "../data/products";
 import { toast } from "react-toastify";
 import Price from "../components/Price";
 import Footer from "../components/Footer";
+import { FaBasketShopping } from "react-icons/fa6";
 
-function Detail({ addToCart }) {
+function Detail({ addToCart, cart }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,8 +17,6 @@ function Detail({ addToCart }) {
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
   const [activeImg, setActiveImg] = useState(0);
-  // const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -35,7 +34,6 @@ function Detail({ addToCart }) {
   const images = product.images || [];
 
   const handleAddToCart = () => {
-    // ❌ size not selected → top toast
     if (!size) {
       toast.error("Please select size", {
         position: "top-center",
@@ -43,25 +41,8 @@ function Detail({ addToCart }) {
       return;
     }
 
-    // ✅ size selected
     addToCart({ ...product, qty, size });
-
-    setShowAdded(true);
-
-    setTimeout(() => {
-      setShowAdded(false);
-    }, 12000);
   };
-
-  // const prevImg = () =>
-  //   setActiveImg((prev) =>
-  //     prev === 0 ? images.length - 1 : prev - 1
-  //   );
-
-  // const nextImg = () =>
-  //   setActiveImg((prev) =>
-  //     prev === images.length - 1 ? 0 : prev + 1
-  //   );
 
   return (
     <>
@@ -77,18 +58,15 @@ function Detail({ addToCart }) {
                   src={img}
                   onClick={() => setActiveImg(i)}
                   className={`w-16 h-20 md:w-20 md:h-24 object-cover cursor-pointer border ${activeImg === i
-                      ? "border-orange-500"
-                      : "border-gray-300"
+                    ? "border-orange-500"
+                    : "border-gray-300"
                     }`}
                   alt=""
                 />
               ))}
             </div>
 
-            <div
-              className="flex-1 cursor-zoom-in order-1 md:order-2"
-              // onClick={() => setLightboxOpen(true)}
-            >
+            <div className="flex-1 cursor-zoom-in order-1 md:order-2">
               <img
                 src={images[activeImg]}
                 alt={product.name}
@@ -121,8 +99,8 @@ function Detail({ addToCart }) {
                       key={s}
                       onClick={() => setSize(s)}
                       className={`px-4 py-2 border ${size === s
-                          ? "bg-orange-500 text-white border-orange-500"
-                          : "border-gray-300"
+                        ? "bg-orange-500 text-white border-orange-500"
+                        : "border-gray-300"
                         }`}
                     >
                       {s}
@@ -167,27 +145,18 @@ function Detail({ addToCart }) {
         </div>
       </div>
 
-      {/* BOTTOM ADD TO CART BLOCK */}
-      {showAdded && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-black text-white px-4 sm:px-8 md:px-16 lg:px-24 py-3 shadow-lg flex items-center gap-4">
-          <div className="flex flex-col">
-            <p className="text-sm font-semibold">
-              {product.name}
-            </p>
-            <p className="text-xs text-gray-300">
-              Product added to cart
-            </p>
-          </div>
-
-          <button
-            onClick={() => navigate("/cart")}
-            className="ml-auto text-sm font-semibold underline text-orange-500"
-          >
-            View Bag
-          </button>
-        </div>
-
+      {/* FLOATING CART ICON — ONLY IF CART HAS ITEMS */}
+      {cart?.length > 0 && (
+        <button
+          onClick={() => navigate("/cart")}
+          className="fixed bottom-6 right-6 z-50 bg-orange-500 hover:bg-orange-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition"
+          title="View Cart"
+        >
+          <FaBasketShopping size={22} />
+        </button>
       )}
+
+
 
       <Footer />
     </>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Price from "../components/Price";
 import Footer from "../components/Footer";
 
-function Cart({ cart, setCart, }) {
+function Cart({ cart, setCart }) {
 
   const removeItem = (index, e) => {
     e.stopPropagation();
@@ -14,13 +14,21 @@ function Cart({ cart, setCart, }) {
     setCart(newCart);
   };
 
+  const updateQty = (index, newQty) => {
+    if (newQty < 1) return;
+
+    const updatedCart = [...cart];
+    updatedCart[index].qty = newQty;
+    setCart(updatedCart);
+  };
+
   const getSellingPrice = (item) => {
     if (!item.originalPrice) return 0;
     return item.discount
       ? Math.round(
-        item.originalPrice -
-        (item.originalPrice * item.discount) / 100
-      )
+          item.originalPrice -
+          (item.originalPrice * item.discount) / 100
+        )
       : item.originalPrice;
   };
 
@@ -67,15 +75,38 @@ function Cart({ cart, setCart, }) {
                     </Link>
 
                     <p className="text-sm text-gray-500 mt-1">
-                      Size: {item.size} | Qty: {item.qty}
+                      Size: {item.size}
                     </p>
 
                     <div className="mt-2">
                       <Price product={item} />
                     </div>
 
+                    {/* QUANTITY CONTROLS */}
+                    <div className="mt-3 flex items-center gap-3">
+                      <button
+                        onClick={() => updateQty(index, item.qty - 1)}
+                        disabled={item.qty === 1}
+                        className="px-3 py-1 border bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+                      >
+                        −
+                      </button>
+
+                      <span className="font-semibold">
+                        {item.qty}
+                      </span>
+
+                      <button
+                        onClick={() => updateQty(index, item.qty + 1)}
+                        className="px-3 py-1 border bg-gray-100 hover:bg-gray-200"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex flex-col items-end gap-24">
+
+                  {/* RIGHT PRICE + REMOVE */}
+                  <div className="flex flex-col items-end gap-6">
                     <button
                       onClick={(e) => removeItem(index, e)}
                       className="text-gray-400 hover:text-red-600 text-lg"
@@ -83,17 +114,11 @@ function Cart({ cart, setCart, }) {
                     >
                       🗑
                     </button>
+
                     <p className="font-semibold">
                       ₹{getSellingPrice(item) * item.qty}
                     </p>
-
-
                   </div>
-
-                  {/* Item Price */}
-
-
-
                 </div>
               ))}
             </div>
@@ -111,10 +136,10 @@ function Cart({ cart, setCart, }) {
                   <span>₹{bagTotal}</span>
                 </div>
 
-                <div className="flex justify-between text-green-600">
+                {/* <div className="flex justify-between text-green-600">
                   <span>Coupon Discount</span>
                   <span>- ₹0</span>
-                </div>
+                </div> */}
 
                 <hr />
 

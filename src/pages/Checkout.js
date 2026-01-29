@@ -166,7 +166,7 @@ function Checkout({ cart, setCart }) {
             <input className="input" name="name" placeholder="Full Name" value={user.name} onChange={handleChange} disabled={isLoading} />
             <input className="input" type="email" name="email" placeholder="Email" value={user.email} onChange={handleChange} disabled={isLoading} />
             <input className="input" name="phone" placeholder="Phone (10 digits)" value={user.phone} onChange={handleChange} disabled={isLoading} />
-
+            <textarea className="input h-24" name="address" placeholder="Full Address" value={user.address} onChange={handleChange} disabled={isLoading} />
             <input className="input" name="pincode" placeholder="PIN Code" value={user.pincode} onChange={handlePincode} disabled={isLoading} />
 
             <div className="grid grid-cols-2 gap-4">
@@ -174,7 +174,7 @@ function Checkout({ cart, setCart }) {
               <input className="input bg-gray-100" placeholder="State" value={user.state} readOnly />
             </div>
 
-            <textarea className="input h-24" name="address" placeholder="Full Address" value={user.address} onChange={handleChange} disabled={isLoading} />
+          
 
             {/* Payment Method */}
             <div>
